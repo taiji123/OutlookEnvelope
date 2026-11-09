@@ -1,0 +1,29 @@
+OUTLOOK ENVELOPE
+
+Try the icon before signing in
+
+1. Open new Outlook on your work PC and switch to Calendar.
+2. Run OutlookEnvelope.exe and choose Preview envelope.
+3. Look beside the clock. If Windows puts the yellow envelope in the hidden icons menu, drag it from that menu to the visible tray.
+4. Single-click the envelope. It should stay put. Double-click it. New Outlook should come forward with Inbox selected. Try again from another mail folder.
+5. Choose End preview. You can open the settings window any time by running the EXE again.
+
+Connect your work Inbox
+
+This build uses a desktop app registration in your Microsoft 365 organization's Microsoft Entra directory. If your organization manages registrations centrally, give IT the following settings and request the two IDs.
+
+1. In the Microsoft Entra admin center, open Entra ID > App registrations > New registration. Name it Outlook Envelope and select Accounts in this organizational directory only.
+2. Under Authentication, add the Mobile and desktop applications platform. Set its redirect URI to http://localhost. The app uses browser sign-in with PKCE.
+3. Under API permissions, add Microsoft Graph > Delegated permissions > Mail.ReadBasic. The EXE requests basic read access for the signed-in user. Have IT grant consent if your organization requires it.
+4. On Overview, copy the Directory (tenant) ID and Application (client) ID into Outlook Envelope. Choose Sign in and select the same work account you use in new Outlook.
+5. Wait until the status says Watching, then click X in the settings window. Choose Yes to close the window and keep the app running in the background, or No to keep the window open. On Windows 11, turn off Outlook under Settings > System > Notifications. Outlook Envelope uses its own tray icon and checks Microsoft 365 about every 20 seconds.
+
+Check live behavior
+
+Have two new messages delivered directly to Inbox. After the envelope appears, read either message and leave the other unread. The envelope should disappear on the next check and stay hidden until another message arrives. Reading a message on another device also counts once the mailbox syncs. Rule deliveries straight to other folders are outside the watched Inbox. Changes that happen between checks can be combined by the mail service.
+
+Right-click > Hide Envelope disables the indicator until you re-enable the checkbox in settings. To stop the app, choose Exit in settings or the envelope's right-click menu, or end the OutlookEnvelope.exe process in Task Manager. If you want it to start when you sign in to Windows, put a shortcut to the EXE in your Startup folder (Windows key + R, then enter shell:startup).
+
+The app can watch while Outlook is closed. Double-click starts or activates new Outlook and selects the English-language Inbox through the folder pane. If the app reports that it could not select Inbox, open Mail and expand the work account in Outlook's folder pane, then use Open Inbox to retest. With multiple accounts, verify that it opens the intended Inbox.
+
+Settings and the sign-in cache stay under your Windows user profile. Windows encrypts the sign-in cache for that user. The app asks Microsoft Graph for message IDs, read status and timestamps. It keeps the tracking data in memory while running. The initial check can take longer for a large Inbox.
